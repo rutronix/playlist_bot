@@ -1,0 +1,173 @@
+import telebot
+
+#создаём плейлисты
+
+fotder1 = 'none_1'
+fotder2 = 'none_2'
+fotder3 = 'none_3'
+fotder4 = 'none_4'
+fotder5 = 'none_4'
+fotder6 = 'none_5'
+fotder7 = 'none'
+fotder8 = 'none'
+fotder9 = 'none'
+fotder10 = 'none'
+fotder11 = 'none'
+fotder12 = 'none'
+fotder13 = 'none'
+fotder14 = 'none'
+fotder15 = 'none'
+fotder16 = 'none'
+
+
+
+
+
+
+bot = telebot.TeleBot('919827464:AAHGRrOShrRuJnN1cLW68X3OAezBpQ8NCyw')
+
+keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard1.row('/playlist', '/settings', '/info')
+
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
+    bot.send_sticker(message.chat.id, 'CAADAgADiQAD6VUFGEbk86lK2V8fAg')
+    bot.send_message(message.chat.id, '/playlist - открыть список всех плейлистов')
+    bot.send_message(message.chat.id, '/settings - настройки плейлистов')
+    bot.send_message(message.chat.id, '/info - инофрмация по боту')
+
+
+
+    keyboard2 = telebot.types.ReplyKeyboardMarkup(True, True)
+    keyboard2.row("<", fotder1, fotder2, fotder3, fotder4, '>')
+
+    keyboard3 = telebot.types.ReplyKeyboardMarkup(True, True)
+    keyboard3.row("<<", fotder5, fotder6, fotder7, fotder8, '>>')
+
+    keyboard4 = telebot.types.ReplyKeyboardMarkup(True, True)
+    keyboard4.row("<<<", fotder9, fotder10, fotder11, fotder12, '>>>')
+
+    keyboard5 = telebot.types.ReplyKeyboardMarkup(True, True)
+    keyboard5.row("<<<<", fotder13, fotder14, fotder15, fotder16, '>>>>')
+
+
+
+
+
+@bot.message_handler(commands=['playlist'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Choose you champion', reply_markup=keyboard2)
+
+@bot.message_handler(commands=['settings'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Выберите плейлист который необходимо переимновать', reply_markup=keyboard2)
+
+
+
+@bot.message_handler(content_types=['text'])
+def start(message):
+    if message.text == '/settings_none_1':
+
+
+            bot.send_message(message.from_user.id, "Укажите имя");
+            bot.register_next_step_handler(message, get_name_1);
+
+
+def get_name_1(message): #
+
+    fotder1 = message.text;
+    print(fotder1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@bot.message_handler(content_types=['text'])
+
+def send_text(message):
+
+
+    ##################################
+
+
+    if message.text.lower() == '>':
+        bot.send_message(message.chat.id, 'page2', reply_markup=keyboard3)
+
+
+    elif message.text.lower() == '>>':
+        bot.send_message(message.chat.id, 'page3', reply_markup=keyboard4)
+
+
+    elif message.text.lower() == '>>>':
+        bot.send_message(message.chat.id, 'page4', reply_markup=keyboard5)
+
+
+    elif message.text.lower() == '>>>>':
+        bot.send_message(message.chat.id, 'page1', reply_markup=keyboard2)
+
+###########################################
+
+    elif message.text.lower() == '<':
+        bot.send_message(message.chat.id, 'page4', reply_markup=keyboard5)
+
+
+    elif message.text.lower() == '<<':
+        bot.send_message(message.chat.id, 'page1', reply_markup=keyboard2)
+
+
+    elif message.text.lower() == '<<<':
+        bot.send_message(message.chat.id, 'page2', reply_markup=keyboard3)
+
+
+    elif message.text.lower() == '<<<<':
+        bot.send_message(message.chat.id, 'page3', reply_markup=keyboard4)
+
+
+######################################
+
+
+
+
+
+
+
+
+bot.polling(none_stop=True, interval=0)
+bot.polling()
