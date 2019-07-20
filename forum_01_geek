@@ -1,0 +1,52 @@
+*используется python и pytelegrambotapi
+
+В в ботах телеграм можно использовать клавиатуру (которые используются под сообщениями, для быстрого ответа)
+
+Моя задача была сделать кнопку, с возможностью её переимновать, для этого в клавиатуре использовалась переменная, создавая мини комманду, её переименовывать.
+
+Переменая переименовалась, но в клавиатуре ничего не изменилось
+
+```
+import telebot
+
+#создаём плейлисты
+
+fotder1 = 'none_1'
+
+bot = telebot.TeleBot('токен')
+
+keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard1.row('/playlist', '/settings', '/info')
+
+keyboard2 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard2.row(fotder1)
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
+
+@bot.message_handler(commands=['settings'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Выберите плейлист который необходимо переимновать', reply_markup=keyboard2)
+
+@bot.message_handler(content_types=['text'])
+def start(message):
+    if message.text == '/settings_none_1':
+
+            bot.send_message(message.from_user.id, "Укажите имя");
+            bot.register_next_step_handler(message, get_name_1);
+
+def get_name_1(message): #
+
+    global fotder1
+    fotder1 = message.text;
+    print(fotder1);
+
+
+
+```
+
+сама переменная это fotler1
+Методом проб и ошибок, я определил что проблемма в том, что клавиатура не обновляется
+
+Подскажите, как это реализовать 
