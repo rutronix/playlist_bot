@@ -1,0 +1,93 @@
+import telebot
+
+
+a1 = "CQADAgADJgIAAojtGEgzcMQYQLSzBgI"
+a2 = '123'
+
+users = [0, 0, 0]
+playlist1 = []
+playlist2 = []
+playlist3 = []
+playlist4 = []
+
+music1 = []
+
+
+
+
+bot = telebot.TeleBot('919827464:AAHGRrOShrRuJnN1cLW68X3OAezBpQ8NCyw')
+
+keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard1.row('Привет', 'Пока', 'я спать', 'я тебя люблю', 'я тебя люблю, моё кривое создание' )
+
+keyboard2 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard2.row('Tombstone', 'EDM & NCS', 'piano', 'others')
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Привет, ты написал мне /start, напиши /reg', reply_markup=keyboard1)
+
+@bot.message_handler(commands=['reg'])
+def start_message(message):
+    global a2;
+    is_reg = False;
+    a2 = message.from_user.id;
+    for row in users:
+        if users[row] == a2:
+            is_reg = True;
+            bot.send_message(message.chat.id, 'Ты уже зарегестрирован(а)');
+            bot.send_message(message.chat.id, a2);
+            break;
+
+
+        if is_reg == False:
+            for row in users:
+                if users[row] == 0:
+                    users[row] = a2;
+                    bot.send_message(message.chat.id, 'Готово');
+                    break;
+
+
+
+
+
+
+
+@bot.message_handler(commands=['playlist'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Choose you champion', reply_markup=keyboard2)
+
+
+@bot.message_handler(content_types=['text'])
+
+def send_text(message):
+    global a1, a2;
+
+
+    if message.text.lower() == 'привет':
+        bot.send_message(message.chat.id, 'Привет')
+
+
+    elif message.text.lower() == '123':
+        bot.send_sticker(message.chat.id, a1)
+
+
+
+
+@bot.message_handler(content_types=['audio'])
+def file_id2(message):
+    print(message)
+    global a1;
+    global a2;
+    a1 = message.audio.file_id;
+    a2 = message.from_user.id;
+
+
+   # print(file_id1)
+
+    print(a1);
+    print(a2);
+
+
+bot.polling(none_stop=True, interval=0)
+bot.polling()
