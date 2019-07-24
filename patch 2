@@ -15,7 +15,7 @@ music1 = []
 
 
 
-bot = telebot.TeleBot('919827464:AAHGRrOShrRuJnN1cLW68X3OAezBpQ8NCyw')
+bot = telebot.TeleBot('KEY')
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard1.row('Привет', 'Пока', 'я спать', 'я тебя люблю', 'я тебя люблю, моё кривое создание' )
