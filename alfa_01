@@ -24,7 +24,7 @@ fotder16 = 'none'
 
 
 
-bot = telebot.TeleBot('919827464:AAHGRrOShrRuJnN1cLW68X3OAezBpQ8NCyw')
+bot = telebot.TeleBot('KEY')
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard1.row('/playlist', '/settings', '/info')
