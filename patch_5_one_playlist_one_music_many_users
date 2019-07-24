@@ -1,0 +1,133 @@
+import telebot
+
+
+a1 = "CQADAgADJgIAAojtGEgzcMQYQLSzBgI"
+a2 = '123'
+
+users = [1, 1, 1, 1, 1, 1, 1]
+num = 0;
+playlist1 = ["1", "1", "1", "1", "1", "1"];
+playlist2 = []
+playlist3 = []
+playlist4 = []
+
+music1 = []
+
+
+
+
+bot = telebot.TeleBot('')
+
+keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard1.row('playlist1', 'playlist2')
+
+keyboard2 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard2.row('playlist1', 'playlist2')
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Привет, ты написал мне /start, напиши /reg', reply_markup=keyboard1)
+
+@bot.message_handler(commands=['reg'])
+def start_message(message):
+    global a2;
+    global num;
+    is_reg = False;
+    a2 = message.from_user.id;
+    row = 0;
+    while row < len(users):
+        print(users)
+        if users[row] == a2:
+            is_reg = True;
+            bot.send_message(message.chat.id, 'Ты уже зарегестрирован(а)');
+            bot.send_message(message.chat.id, a2);
+            break;
+        row = row +1;
+
+    row = 0;
+
+    if is_reg == False:
+        while row < len(users):
+            print(users)
+            if users[row] == 1:
+                users[row] = a2;
+                num = row;
+                print(users);
+                row = 0;
+                bot.send_message(message.chat.id, 'Готово, отправть мне аудиофайл. затем нажми или введи playlist1');
+               # bot.send_message(message.chat.id, num);
+               # bot.send_message(message.chat.id, "это ваш номер в массиве, для обычного юзера - бесполезная информация");
+                bot.send_message(message.chat.id, "но можно только один аудиофайл, тк я криворукий и забыл сделать 2хмерную бд, сори, скоро пофикшу");
+                bot.send_sticker(message.chat.id, 'CAADAgADfwAD6VUFGNA-rNwTjfUjAg');
+
+
+                is_reg = True;
+                break;
+            row = row +1;
+
+
+
+
+
+
+
+@bot.message_handler(commands=['playlist'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Choose you champion', reply_markup=keyboard2)
+
+
+
+
+@bot.message_handler(content_types=['text'])
+
+def send_text(message):
+    global a1, a2, num;
+    row = 0
+
+    if message.text.lower() == 'привет':
+        bot.send_message(message.chat.id, 'Привет')
+
+
+    elif message.text.lower() == '123':
+        bot.send_sticker(message.chat.id, a1)
+
+    if message.text.lower() == 'playlist1':
+        row = 0
+      #  while row < len(playlist1):
+
+    bot.send_sticker(message.chat.id, playlist1[num]);
+               # print("123")
+              #  row = row + 1;
+
+
+
+
+
+
+
+
+@bot.message_handler(content_types=['audio'])
+def file_id2(message):
+    print(message)
+    global a1;
+    global a2;
+    global num;
+    global playlist1;
+    a1 = message.audio.file_id;
+    a2 = message.from_user.id;
+    playlist1[num] = a1;
+    print(a1);
+    a1 = '0';
+
+
+
+
+@bot.message_handler(content_types=['sticker'])
+def sticker_id(message):
+    print(message)
+
+
+
+
+bot.polling(none_stop=True, interval=0)
+bot.polling()
