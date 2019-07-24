@@ -1,0 +1,28 @@
+a2 = 456762
+a1 = 215215
+users = [3, 3, 3, 3, 3];
+#row = 0
+
+while row < len(users):
+    
+    if users[row] == 3:
+        users[row] = a2;
+        print(users);
+        row = 0;
+        break;
+    row =+1; 
+
+row = 0
+
+while row < len(users):
+        #print(users);
+        #row =+1;
+        if users[row] == 3:
+            users[row] = a1;
+            print(users);
+            row = 0;
+            break;
+        row =+1; 
+
+
+
